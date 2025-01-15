@@ -10,6 +10,7 @@ class AdminController extends Controller
 {
     public function index(){
         $empresa_id = Auth::user()->empresa_id;
+        
         $empresa = Empresa::where('id',$empresa_id)->first();
         return view('admin.index', compact('empresa'));
     }
