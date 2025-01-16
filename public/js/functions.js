@@ -3,7 +3,8 @@ $(document).ready(function () {
 
     ///////////////////////////////////////// Función para agregar y eliminar secciones
     $("#section_hrp").append($("#section_hrp1").html());
-    $(".addsection").on("click", function () {
+    $('#addsection').click( function () {
+    // $("#addsection").on("click", function () {
         $("#section_hrp").append($("#section_hrp1").html());
     });
 

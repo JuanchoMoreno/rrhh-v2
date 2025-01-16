@@ -135,7 +135,7 @@
                             <div class="col-md-1">
                                 <div class="form-group">
                                     {{-- <label for="estado">Estado</label> --}}
-                                    <a type="submit" class="btn btn-primary btn-sm" id=""><i
+                                    <a class="btn btn-primary btn-sm" id="addsection"><i
                                             class="fas fa-plus"></i></a>
                                 </div>
                             </div>
