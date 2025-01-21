@@ -144,7 +144,7 @@
                         <table id="horasExtrasTable" class="table table-striped table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="text-align: center">#</th>
+                                    <th scope="col" style="text-align: center" class="numerador">#</th>
                                     <th scope="col">Actividad</th>
                                     <th scope="col" style="padding: 0px 130px 0px 40px;">Fecha de reporte</th>
                                     <th scope="col">Horas Ex Diurnas ordinario</th>
@@ -163,7 +163,7 @@
                                 <?php $cantidadHE = 1; ?>
                                 {{-- @foreach ($horas_extras as $hora_extra) --}}
                                 <tr>
-                                    <td style="text-align: center">{{ $cantidadHE++ }}</td>
+                                    <td style="text-align: center">1</td>
                                     <td><input type="text" class="form-control" name="actividad"
                                             value="{{ old('actividad') }}" required>
                                         @error('actividad')

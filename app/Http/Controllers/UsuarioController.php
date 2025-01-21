@@ -69,7 +69,8 @@ class UsuarioController extends Controller
             $usuario->password = Hash::make($request->password);
             // $usuario->cargo = $request->cargo;
             $usuario->empresa_id = Auth::user()->empresa_id;
-            $usuario->cargo_id = $request->cargo_id;
+            $usuario->cargo_id = $request->cargo;
+            var_dump($usuario->cargo_id);
             $usuario->save();
 
             $usuario->assignRole($request->rol);
@@ -123,7 +124,7 @@ class UsuarioController extends Controller
         if ($request->filled('password')) {
             $usuario->password = Hash::make($request->documento);
         }
-        $usuario->cargo_id = $request->cargo_id;
+        $usuario->cargo_id = $request->cargo;
         $usuario->save();
 
         // $usuario->syncRoles([]); 

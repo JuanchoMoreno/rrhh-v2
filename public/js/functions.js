@@ -4,7 +4,9 @@ $(document).ready(function () {
     ///////////////////////////////////////// Función para agregar y eliminar secciones
     $("#section_hrp").append($("#section_hrp1").html());
     $('#addsection').click( function () {
-    // $("#addsection").on("click", function () {
+        $('.numerador').each(function(index, element) {
+            $(element).html(index + 1);
+        });
         $("#section_hrp").append($("#section_hrp1").html());
     });
 
