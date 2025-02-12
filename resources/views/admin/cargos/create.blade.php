@@ -5,7 +5,7 @@
 @section('content_header')
     <link rel="stylesheet" href="sweetalert2.min.css">
     <link rel="stylesheet" href="{{ asset('css/bounce.css') }}">
-    <h1>Cargos/Creación de rol</b></h1>
+    <h1>Cargos/Creación del cargo</b></h1>
     <hr>
 @stop
 
@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Nombre del rol</label>
+                                    <label for="">Nombre del Cargo</label>
                                     <input type="text" class="form-control" value="{{old('name')}}" name="name" required>
                                     @error('name')
                                         <small style="color: red">{{ $message }}</small>
