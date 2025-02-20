@@ -19,11 +19,12 @@ return new class extends Migration {
         });
     }
 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('horas_extras_gen_det');
+        Schema::dropIfExists('hora_extra_gen_dets');
     }
 };

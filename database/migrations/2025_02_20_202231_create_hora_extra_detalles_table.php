@@ -27,11 +27,12 @@ return new class extends Migration {
         });
     }
 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('horas_extras_det');
+        Schema::dropIfExists('hora_extra_detalles');
     }
 };

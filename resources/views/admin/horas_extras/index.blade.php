@@ -1,3 +1,4 @@
+<!-- filepath: /c:/xampp/htdocs/sistemas_sm/resources/views/admin/horas_extras/index.blade.php -->
 @extends('adminlte::page')
 
 @section('title', 'Horas Extras')
@@ -25,6 +26,8 @@
                             <th scope="col" style="text-align: center">#</th>
                             <th scope="col">Documento</th>
                             <th scope="col">Nombre de Usuario</th>
+                            {{-- <th scope="col">Departamento</th> --}}
+                            {{-- <th scope="col">Clase</th> --}}
                             <th scope="col">Centro de Costo</th>
                             <th scope="col">Mes Reportado</th>
                             <th scope="col">Aprobador</th>
@@ -39,6 +42,8 @@
                             <td style="text-align: center">{{ $contadorHoras++ }}</td>
                             <td>{{ $hora_extra->usuario->documento }}</td>
                             <td>{{ $hora_extra->usuario->name }}</td>
+                            {{-- <td>{{ $hora_extra->departamento->name }}</td> --}}
+                            {{-- <td>{{ $hora_extra->clase->name }}</td> --}}
                             <td>{{ $hora_extra->centroCosto->name }}</td>
                             <td>{{ $hora_extra->mes_reportado }}</td>
                             <td>
@@ -65,6 +70,7 @@
                                         class="btn btn-info btn-sm fas fa-eye"></a>
                                     <a href="{{ url('/admin/horas_extras/' . $hora_extra->id . '/edit') }}"
                                         class="btn btn-warning btn-sm fas fa-edit"></a>
+                                    {{-- @if ($hora_extra->id != 1) --}}
                                     <form class="btn-group" action="{{ url('/admin/horas_extras', $hora_extra->id) }}"
                                         method="post" onclick="pregunta{{ $hora_extra->id }}(event)"
                                         id="formDelete{{ $hora_extra->id }}">
@@ -73,6 +79,10 @@
                                         <button type="submit" class="btn btn-danger btn-sm fas fa-trash-alt btn-group"
                                             role="group"></button>
                                     </form>
+                                    {{-- @else
+                                        <button type="button" class="btn btn-danger btn-sm fas fa-trash-alt btn-group"
+                                            role="group" disabled></button>
+                                        @endif --}}
                                 </div>
                             </td>
                         </tr>
