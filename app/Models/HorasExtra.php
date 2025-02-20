@@ -14,6 +14,15 @@ class HorasExtra extends Model
 
     protected $table = 'horas_extras';
 
+    public function horasExtrasGeneral()
+    {
+        return $this->belongsToMany(HorasExtrasGeneral::class, 'horas_extras_general_detalle', 'horas_extras_id', 'horas_extras_general_id');
+    }
+
+    public function horasExtrasDetalle()
+    {
+        return $this->belongsToMany(HorasExtrasDetalle::class, 'horas_extras_general_detalle', 'horas_extras_id', 'horas_extras_detalle_id');
+    }
     public function usuario()
     {
         return $this->belongsTo(User::class);

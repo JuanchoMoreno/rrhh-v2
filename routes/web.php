@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+use App\Http\Controllers\HorasExtrasController;
+
+Route::resource('horas_extras', HorasExtrasController::class)->middleware('auth');
 
 Auth::routes();
 
@@ -50,12 +53,12 @@ Route::put('/admin/cargos/{id}', [App\Http\Controllers\CargoController::class, '
 Route::delete('/admin/cargos/{id}', [App\Http\Controllers\CargoController::class, 'destroy'])->name('admin.cargos.destroy')->middleware('auth');
 
 //rutas de horas extras
-Route::get('/admin/horas_extras', [App\Http\Controllers\Horas_ExtrasController::class, 'index'])->name('admin.horas_extras.index')->middleware('auth');
-Route::get('/admin/horas_extras/create', [App\Http\Controllers\Horas_ExtrasController::class, 'create'])->name('admin.horas_extras.create')->middleware('auth');
-Route::post('/admin/horas_extras/create', [App\Http\Controllers\Horas_ExtrasController::class, 'store'])->name('admin.horas_extras.store')->middleware('auth');
-Route::get('/admin/horas_extras/{id}', [App\Http\Controllers\Horas_ExtrasController::class, 'show'])->name('admin.horas_extras.show')->middleware('auth');
-Route::get('/admin/horas_extras/{id}/edit', [App\Http\Controllers\Horas_ExtrasController::class, 'edit'])->name('admin.horas_extras.edit')->middleware('auth');
-Route::get('/admin/horas_extras/clase/{id_depart}', [App\Http\Controllers\Horas_ExtrasController::class, 'buscar_clase'])->name('admin.horas_extras.crear.buscar_clases')->middleware('auth');
-Route::get('/admin/horas_extras/ccosto/{id_clase}', [App\Http\Controllers\Horas_ExtrasController::class, 'buscar_ccosto'])->name('admin.horas_extras.crear.buscar_ccostos')->middleware('auth');
-Route::put('/admin/horas_extras/{id}', [App\Http\Controllers\Horas_ExtrasController::class, 'update'])->name('admin.horas_extras.update')->middleware('auth');
-Route::delete('/admin/horas_extras/{id}', [App\Http\Controllers\Horas_ExtrasController::class, 'destroy'])->name('admin.horas_extras.destroy')->middleware('auth');
+Route::get('/admin/horas_extras', [App\Http\Controllers\HorasExtrasController::class, 'index'])->name('admin.horas_extras.index')->middleware('auth');
+Route::get('/admin/horas_extras/create', [App\Http\Controllers\HorasExtrasController::class, 'create'])->name('admin.horas_extras.create')->middleware('auth');
+Route::post('/admin/horas_extras/create', [App\Http\Controllers\HorasExtrasController::class, 'store'])->name('admin.horas_extras.store')->middleware('auth');
+Route::get('/admin/horas_extras/{id}', [App\Http\Controllers\HorasExtrasController::class, 'show'])->name('admin.horas_extras.show')->middleware('auth');
+Route::get('/admin/horas_extras/{id}/edit', [App\Http\Controllers\HorasExtrasController::class, 'edit'])->name('admin.horas_extras.edit')->middleware('auth');
+Route::get('/admin/horas_extras/clase/{id_depart}', [App\Http\Controllers\HorasExtrasController::class, 'buscar_clase'])->name('admin.horas_extras.crear.buscar_clases')->middleware('auth');
+Route::get('/admin/horas_extras/ccosto/{id_clase}', [App\Http\Controllers\HorasExtrasController::class, 'buscar_ccosto'])->name('admin.horas_extras.crear.buscar_ccostos')->middleware('auth');
+Route::put('/admin/horas_extras/{id}', [App\Http\Controllers\HorasExtrasController::class, 'update'])->name('admin.horas_extras.update')->middleware('auth');
+Route::delete('/admin/horas_extras/{id}', [App\Http\Controllers\HorasExtrasController::class, 'destroy'])->name('admin.horas_extras.destroy')->middleware('auth');

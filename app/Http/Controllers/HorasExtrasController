@@ -12,38 +12,15 @@ use App\Models\Ccostos;
 use App\Models\Cargo;
 use App\Models\TipoDoc;
 use App\Models\HorasExtra;
-class Horas_ExtrasController extends Controller
+
+class HorasExtrasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // Cargar las relaciones necesarias
-        $horas_extras = HorasExtra::with(['usuario', 'departamento', 'clase', 'centroCosto'])->get();
-
-        // Obtener usuarios con roles de Jefe o Gerente
-        $aprobadores = User::role(['Jefe','Gerente'])->get();
+        $horas_extras = HorasExtra::with('usuario', 'centroCosto')->get();
+        $aprobadores = User::where('role', 'aprobador')->get(); // Ajusta esto según tu lógica de negocio
 
         return view('admin.horas_extras.index', compact('horas_extras', 'aprobadores'));
-    }
-
-    public function create()
-    {
-        $usuario = Auth::user();
-        $cargos = DB::table('cargos')->get();
-        $tipodocs = TipoDoc::all();
-        $departamentos = DB::table('departamentos')->get();
-        $clases = DB::table('clases')->get();
-        $ccostos = DB::table('ccostos')->get();
-        $horas_extras = HorasExtra::with(['usuario', 'departamento', 'clase', 'centroCosto'])->get();
-        $aprobadores = User::role(['Jefe','Gerente'])->get();
-        // Obtener usuarios con roles de Jefe y Gerente
-        $jefes = User::role('Jefe')->get();
-        $gerentes = User::role('Gerente')->get();
-
-        return view('admin.horas_extras.create', compact('departamentos', 'clases', 'ccostos', 'usuario', 'cargos', 'tipodocs', 'jefes', 'gerentes','horas_extras','aprobadores'));
-
     }
 
     public function buscar_clase($id_depto)
@@ -70,42 +47,68 @@ class Horas_ExtrasController extends Controller
         }
     }
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('horas_extras.create');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'horas_extras_general_id' => 'required',
+            'horas_extras_detalle_id' => 'required',
+            'usuario_id' => 'required',
+        ]);
+
+        HorasExtra::create($request->all());
+
+        return redirect()->route('horas_extras.index')->with('success', 'Horas Extra created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(HorasExtra $horasExtra)
     {
-        //
+        return view('horas_extras.show', compact('horasExtra'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(HorasExtra $horasExtra)
     {
-        //
+        return view('horas_extras.edit', compact('horasExtra'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, HorasExtra $horasExtra)
     {
-        //
+        $request->validate([
+            'horas_extras_general_id' => 'required',
+            'horas_extras_detalle_id' => 'required',
+            'usuario_id' => 'required',
+        ]);
+
+        $horasExtra->update($request->all());
+
+        return redirect()->route('horas_extras.index')->with('success', 'Horas Extra updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(HorasExtra $horasExtra)
     {
-        //
+        $horasExtra->delete();
+
+        return redirect()->route('horas_extras.index')->with('success', 'Horas Extra deleted successfully.');
     }
 }
