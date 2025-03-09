@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('horas_extras_det', function (Blueprint $table) {
+        Schema::create('horas_extras_detalles', function (Blueprint $table) {
             $table->id();
             $table->float('permisos');
             //Campos de horas extras
@@ -23,11 +23,14 @@ return new class extends Migration {
             $table->float('recargo_diur_fest');
             $table->float('recargo_noct_fest');
             $table->float('recargo_ord_fest_noct');
-            $table->foreignId('hora_extra_general_id')->constrained('horas_extras_gen')->onDelete('cascade');
+            $table->float('suma_horas_extras');
+            $table->float('suma_recargos');
+            $table->float('total_hrex_recargos');
+            $table->float('total_solicitud');
+            $table->foreignId('horas_extras_general_id')->constrained('horas_extras_general')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

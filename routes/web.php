@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HoraExtraGenDetController;
 use App\Http\Controllers\HoraExtraGeneralController;
 use App\Http\Controllers\HoraExtraDetalleController;
 
@@ -51,31 +50,20 @@ Route::get('/admin/cargos/{id}/edit', [App\Http\Controllers\CargoController::cla
 Route::put('/admin/cargos/{id}', [App\Http\Controllers\CargoController::class, 'update'])->name('admin.cargos.update')->middleware('auth');
 Route::delete('/admin/cargos/{id}', [App\Http\Controllers\CargoController::class, 'destroy'])->name('admin.cargos.destroy')->middleware('auth');
 
-// Rutas de horas extras unidas
-Route::get('/admin/horas_extras', [HoraExtraGenDetController::class, 'index'])->name('admin.horas_extras.index')->middleware('auth');
-Route::get('/admin/horas_extras/create', [HoraExtraGenDetController::class, 'create'])->name('admin.horas_extras.create')->middleware('auth');
-Route::post('/admin/horas_extras/create', [HoraExtraGenDetController::class, 'store'])->name('admin.horas_extras.store')->middleware('auth');
-Route::get('/admin/horas_extras/{id}', [HoraExtraGenDetController::class, 'show'])->name('admin.horas_extras.show')->middleware('auth');
-Route::get('/admin/horas_extras/{id}/edit', [HoraExtraGenDetController::class, 'edit'])->name('admin.horas_extras.edit')->middleware('auth');
-Route::put('/admin/horas_extras/{id}', [HoraExtraGenDetController::class, 'update'])->name('admin.horas_extras.update')->middleware('auth');
-Route::delete('/admin/horas_extras/{id}', [HoraExtraGenDetController::class, 'destroy'])->name('admin.horas_extras.destroy')->middleware('auth');
-Route::get('/admin/horas_extras/clase/{id_depart}', [HoraExtraGenDetController::class, 'buscar_clase'])->name('admin.horas_extras.crear.buscar_clases')->middleware('auth');
-Route::get('/admin/horas_extras/ccosto/{id_clase}', [HoraExtraGenDetController::class, 'buscar_ccosto'])->name('admin.horas_extras.crear.buscar_ccostos')->middleware('auth');
-
 // Rutas de horas extras generales
-Route::get('/admin/horas_extras_gen', [HoraExtraGeneralController::class, 'index'])->name('admin.horas_extras_gen.index')->middleware('auth');
-Route::get('/admin/horas_extras_gen/create', [HoraExtraGeneralController::class, 'create'])->name('admin.horas_extras_gen.create')->middleware('auth');
-Route::post('/admin/horas_extras_gen/create', [HoraExtraGeneralController::class, 'store'])->name('admin.horas_extras_gen.store')->middleware('auth');
-Route::get('/admin/horas_extras_gen/{id}', [HoraExtraGeneralController::class, 'show'])->name('admin.horas_extras_gen.show')->middleware('auth');
-Route::get('/admin/horas_extras_gen/{id}/edit', [HoraExtraGeneralController::class, 'edit'])->name('admin.horas_extras_gen.edit')->middleware('auth');
-Route::put('/admin/horas_extras_gen/{id}', [HoraExtraGeneralController::class, 'update'])->name('admin.horas_extras_gen.update')->middleware('auth');
-Route::delete('/admin/horas_extras_gen/{id}', [HoraExtraGeneralController::class, 'destroy'])->name('admin.horas_extras_gen.destroy')->middleware('auth');
+Route::get('/admin/horas_extras_gen', [HoraExtraGeneralController::class, 'index'])->name('admin.horas_extras.index')->middleware('auth');
+Route::get('/admin/horas_extras_gen/create', [HoraExtraGeneralController::class, 'create'])->name('admin.horas_extras.create')->middleware('auth');
+Route::post('/admin/horas_extras_gen/create', [HoraExtraGeneralController::class, 'store'])->name('admin.horas_extras.store')->middleware('auth');
+Route::get('/admin/horas_extras_gen/{id}', [HoraExtraGeneralController::class, 'show'])->name('admin.horas_extras.show')->middleware('auth');
+Route::get('/admin/horas_extras_gen/{id}/edit', [HoraExtraGeneralController::class, 'edit'])->name('admin.horas_extras.edit')->middleware('auth');
+Route::put('/admin/horas_extras_gen/{id}', [HoraExtraGeneralController::class, 'update'])->name('admin.horas_extras.update')->middleware('auth');
+Route::delete('/admin/horas_extras_gen/{id}', [HoraExtraGeneralController::class, 'destroy'])->name('admin.horas_extras.destroy')->middleware('auth');
 
 // Rutas de horas extras detalles
-Route::get('/admin/horas_extras_det', [HoraExtraDetalleController::class, 'index'])->name('admin.horas_extras_det.index')->middleware('auth');
-Route::get('/admin/horas_extras_det/create', [HoraExtraDetalleController::class, 'create'])->name('admin.horas_extras_det.create')->middleware('auth');
-Route::post('/admin/horas_extras_det/create', [HoraExtraDetalleController::class, 'store'])->name('admin.horas_extras_det.store')->middleware('auth');
-Route::get('/admin/horas_extras_det/{id}', [HoraExtraDetalleController::class, 'show'])->name('admin.horas_extras_det.show')->middleware('auth');
-Route::get('/admin/horas_extras_det/{id}/edit', [HoraExtraDetalleController::class, 'edit'])->name('admin.horas_extras_det.edit')->middleware('auth');
-Route::put('/admin/horas_extras_det/{id}', [HoraExtraDetalleController::class, 'update'])->name('admin.horas_extras_det.update')->middleware('auth');
-Route::delete('/admin/horas_extras_det/{id}', [HoraExtraDetalleController::class, 'destroy'])->name('admin.horas_extras_det.destroy')->middleware('auth');
+Route::get('/admin/horas_extras_det', [HoraExtraDetalleController::class, 'index'])->name('admin.horas_extras.index')->middleware('auth');
+Route::get('/admin/horas_extras_det/create', [HoraExtraDetalleController::class, 'create'])->name('admin.horas_extras.create')->middleware('auth');
+Route::post('/admin/horas_extras_det/create', [HoraExtraDetalleController::class, 'store'])->name('admin.horas_extras.store')->middleware('auth');
+Route::get('/admin/horas_extras_det/{id}', [HoraExtraDetalleController::class, 'show'])->name('admin.horas_extras.show')->middleware('auth');
+Route::get('/admin/horas_extras_det/{id}/edit', [HoraExtraDetalleController::class, 'edit'])->name('admin.horas_extras.edit')->middleware('auth');
+Route::put('/admin/horas_extras_det/{id}', [HoraExtraDetalleController::class, 'update'])->name('admin.horas_extras.update')->middleware('auth');
+Route::delete('/admin/horas_extras_det/{id}', [HoraExtraDetalleController::class, 'destroy'])->name('admin.horas_extras.destroy')->middleware('auth');

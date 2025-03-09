@@ -3,87 +3,51 @@
 @section('title', 'Horas Extras')
 
 @section('content_header')
+
+
 <h1>Listado de Horas Extras</h1>
 <hr>
 @stop
 
 @section('content')
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-outline card-green">
-            <div class="card-header">
-                <h2 class="card-title">Horas Extras</h2>
-                <div class="card-tools">
-                    <a href="{{ url('/admin/horas_extras/create') }}" class="btn btn-primary btn-sm"><i
-                            class="fas fa-plus"></i> Nuevo</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <table id="horasExtrasTable" class="table table-striped table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="text-align: center">#</th>
-                            <th scope="col">Documento</th>
-                            <th scope="col">Nombre de Usuario</th>
-                            <!-- <th scope="col">Departamento</th>
-                            <th scope="col">Clase</th> -->
-                            <th scope="col">Centro de Costo</th>
-                            <th scope="col">Mes Reportado</th>
-                            <th scope="col">Aprobador</th>
-                            <th scope="col">Creación</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col" style="text-align: center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $contadorHoras = 1; ?>
-                        @foreach ($heGen as $heGenerals)
-                        <tr>
-                            <td style="text-align: center">{{ $contadorHoras++ }}</td>
-                            <td>{{ $usuario->documento }}</td>
-                            <td>{{ $usuario->name }}</td>
-                            <td>{{ $heGenerals->centroCosto->name }}</td>
-                            <td>{{ $heGenerals->mes_reportado}}</td>
-                            <td>{{ $heGenerals->aprobador}}</td>
-                            <td>{{ $heGenerals->fecha}}</td>
-                            <td>
-                                @if ($heGenerals->estado == 'Pendiente')
-                                <span class="badge badge-warning">{{ $heGenerals->estado }}</span>
-                                @elseif ($heGenerals->estado == 'Rechazado')
-                                <span class="badge badge-danger">{{ $heGenerals->estado }}</span>
-                                @elseif ($heGenerals->estado == 'Aceptado')
-                                <span class="badge badge-success">{{ $heGenerals->estado }}</span>
-                                @else
-                                <span>{{ $heGenerals->estado }}</span>
-                                @endif
-                            </td>
-                            <td style="text-align: center">
-                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a href="{{ url('/admin/horas_extras', $heGenerals->id) }}"
-                                        class="btn btn-info btn-sm fas fa-eye"></a>
-                                    <a href="{{ url('/admin/horas_extras/' . $heGenerals->id . '/edit') }}"
-                                        class="btn btn-warning btn-sm fas fa-edit"></a>
-                                    <form class="btn-group" action="{{ url('/admin/horas_extras', $heGenerals->id) }}"
-                                        method="post" onclick="pregunta{{ $heGenerals->id }}(event)"
-                                        id="formDelete{{ $heGenerals->id }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm fas fa-trash-alt btn-group"
-                                            role="group"></button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div class="container">
+    <h1>Horas Extras Generales</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Departamento</th>
+                <th>Clase</th>
+                <th>Centro de Costo</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($horasExtras as $horaExtra)
+            <tr>
+                <td>{{ $horaExtra->id }}</td>
+                <td>{{ $horaExtra->departamentoNombre }}</td>
+                <td>{{ $horaExtra->claseNombre }}</td>
+                <td>{{ $horaExtra->ccostoNombre }}</td>
+                <td>{{ $horaExtra->fecha }}</td>
+                <td>
+                    <a href="{{ route('admin.horas_extras_gen.show', $horaExtra->id) }}" class="btn btn-info">Ver</a>
+                    <a href="{{ route('admin.horas_extras_gen.edit', $horaExtra->id) }}"
+                        class="btn btn-warning">Editar</a>
+                    <form action="{{ route('admin.horas_extras_gen.destroy', $horaExtra->id) }}" method="POST"
+                        style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
-@stop
-
-@section('js')
+@endsection
 <script>
 $(document).ready(function() {
     $('#horasExtrasTable').DataTable({

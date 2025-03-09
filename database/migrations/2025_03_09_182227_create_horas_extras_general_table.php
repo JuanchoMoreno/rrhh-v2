@@ -10,14 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('horas_extras_gen', function (Blueprint $table) {
+        Schema::create('horas_extras_general', function (Blueprint $table) {
             $table->id();
             $table->string('departamento');
             $table->string('clase');
             $table->string('ccosto');
             $table->string('mes_reportado');
             $table->string('proyecto_asociado');
-            $table->date('fecha');
+            $table->date('fecha_reporte');
             $table->string('actividad');
             $table->string('estado');
             // Campos foraneos
@@ -28,7 +28,6 @@ return new class extends Migration {
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

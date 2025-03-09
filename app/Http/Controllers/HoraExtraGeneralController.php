@@ -1,18 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\HoraExtraGeneral;
 use Illuminate\Http\Request;
 
-class HoraExtraGeneralController
+class HoraExtraGeneralController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return view("admin.horas_extras.index");
+        //
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         //
@@ -29,7 +34,7 @@ class HoraExtraGeneralController
     /**
      * Display the specified resource.
      */
-    public function show(HoraExtraGeneral $HoraExtraGeneral)
+    public function show(HoraExtraGeneral $horaExtraGeneral)
     {
         //
     }
@@ -37,7 +42,7 @@ class HoraExtraGeneralController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HoraExtraGeneral $HoraExtraGeneral)
+    public function edit(HoraExtraGeneral $horaExtraGeneral)
     {
         //
     }
@@ -45,7 +50,7 @@ class HoraExtraGeneralController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HoraExtraGeneral $HoraExtraGeneral)
+    public function update(Request $request, HoraExtraGeneral $horaExtraGeneral)
     {
         //
     }
@@ -53,7 +58,7 @@ class HoraExtraGeneralController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HoraExtraGeneral $HoraExtraGeneral)
+    public function destroy(HoraExtraGeneral $horaExtraGeneral)
     {
         //
     }
