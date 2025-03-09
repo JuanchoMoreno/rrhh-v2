@@ -1,4 +1,3 @@
-<!-- filepath: /c:/xampp/htdocs/sistemas_sm/resources/views/admin/horas_extras/index.blade.php -->
 @extends('adminlte::page')
 
 @section('title', 'Horas Extras')
@@ -26,63 +25,52 @@
                             <th scope="col" style="text-align: center">#</th>
                             <th scope="col">Documento</th>
                             <th scope="col">Nombre de Usuario</th>
-                            {{-- <th scope="col">Departamento</th> --}}
-                            {{-- <th scope="col">Clase</th> --}}
+                            <!-- <th scope="col">Departamento</th>
+                            <th scope="col">Clase</th> -->
                             <th scope="col">Centro de Costo</th>
                             <th scope="col">Mes Reportado</th>
                             <th scope="col">Aprobador</th>
+                            <th scope="col">Creación</th>
                             <th scope="col">Estado</th>
                             <th scope="col" style="text-align: center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $contadorHoras = 1; ?>
-                        @foreach ($horas_extras as $hora_extra)
+                        @foreach ($heGen as $heGenerals)
                         <tr>
                             <td style="text-align: center">{{ $contadorHoras++ }}</td>
-                            <td>{{ $hora_extra->usuario->documento }}</td>
-                            <td>{{ $hora_extra->usuario->name }}</td>
-                            {{-- <td>{{ $hora_extra->departamento->name }}</td> --}}
-                            {{-- <td>{{ $hora_extra->clase->name }}</td> --}}
-                            <td>{{ $hora_extra->centroCosto->name }}</td>
-                            <td>{{ $hora_extra->mes_reportado }}</td>
+                            <td>{{ $usuario->documento }}</td>
+                            <td>{{ $usuario->name }}</td>
+                            <td>{{ $heGenerals->centroCosto->name }}</td>
+                            <td>{{ $heGenerals->mes_reportado}}</td>
+                            <td>{{ $heGenerals->aprobador}}</td>
+                            <td>{{ $heGenerals->fecha}}</td>
                             <td>
-                                @foreach ($aprobadores as $aprobador)
-                                @if ($hora_extra->aprobador_id == $aprobador->id)
-                                {{ $aprobador->name }}
-                                @endif
-                                @endforeach
-                            </td>
-                            <td>
-                                @if ($hora_extra->estado == 'Pendiente')
-                                <span class="badge badge-warning">{{ $hora_extra->estado }}</span>
-                                @elseif ($hora_extra->estado == 'Rechazado')
-                                <span class="badge badge-danger">{{ $hora_extra->estado }}</span>
-                                @elseif ($hora_extra->estado == 'Aceptado')
-                                <span class="badge badge-success">{{ $hora_extra->estado }}</span>
+                                @if ($heGenerals->estado == 'Pendiente')
+                                <span class="badge badge-warning">{{ $heGenerals->estado }}</span>
+                                @elseif ($heGenerals->estado == 'Rechazado')
+                                <span class="badge badge-danger">{{ $heGenerals->estado }}</span>
+                                @elseif ($heGenerals->estado == 'Aceptado')
+                                <span class="badge badge-success">{{ $heGenerals->estado }}</span>
                                 @else
-                                <span>{{ $hora_extra->estado }}</span>
+                                <span>{{ $heGenerals->estado }}</span>
                                 @endif
                             </td>
                             <td style="text-align: center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a href="{{ url('/admin/horas_extras', $hora_extra->id) }}"
+                                    <a href="{{ url('/admin/horas_extras', $heGenerals->id) }}"
                                         class="btn btn-info btn-sm fas fa-eye"></a>
-                                    <a href="{{ url('/admin/horas_extras/' . $hora_extra->id . '/edit') }}"
+                                    <a href="{{ url('/admin/horas_extras/' . $heGenerals->id . '/edit') }}"
                                         class="btn btn-warning btn-sm fas fa-edit"></a>
-                                    {{-- @if ($hora_extra->id != 1) --}}
-                                    <form class="btn-group" action="{{ url('/admin/horas_extras', $hora_extra->id) }}"
-                                        method="post" onclick="pregunta{{ $hora_extra->id }}(event)"
-                                        id="formDelete{{ $hora_extra->id }}">
+                                    <form class="btn-group" action="{{ url('/admin/horas_extras', $heGenerals->id) }}"
+                                        method="post" onclick="pregunta{{ $heGenerals->id }}(event)"
+                                        id="formDelete{{ $heGenerals->id }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm fas fa-trash-alt btn-group"
                                             role="group"></button>
                                     </form>
-                                    {{-- @else
-                                        <button type="button" class="btn btn-danger btn-sm fas fa-trash-alt btn-group"
-                                            role="group" disabled></button>
-                                        @endif --}}
                                 </div>
                             </td>
                         </tr>

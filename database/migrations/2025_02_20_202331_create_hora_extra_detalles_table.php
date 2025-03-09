@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->float('recargo_diur_fest');
             $table->float('recargo_noct_fest');
             $table->float('recargo_ord_fest_noct');
+            $table->foreignId('hora_extra_general_id')->constrained('horas_extras_gen')->onDelete('cascade');
             $table->timestamps();
         });
     }

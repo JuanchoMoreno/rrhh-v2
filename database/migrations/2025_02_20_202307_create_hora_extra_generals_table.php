@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->foreignId('depart_id')->constrained('departamentos');
             $table->foreignId('clases_id')->constrained('clases');
             $table->foreignId('ccostos_id')->constrained('ccostos');
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
