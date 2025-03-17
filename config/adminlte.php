@@ -335,20 +335,7 @@ return [
       'classes' => 'bg-primary text-light',
     ],
     [
-      'text' => 'Roles',
-      'icon' => 'fas fa-user-tag',
-      'classes' => 'bg-secondary text-light',
-      'submenu' => [
-        [
-          'text' => 'Lista de roles',
-          'url' => 'admin/roles',
-          'icon' => 'fas fa-list',
-          'classes' => 'bg-transparent text-light',
-        ],
-      ],
-    ],
-    [
-      'text' => 'Usuarios y Cargos',
+      'text' => 'Usuarios, Cargos y Roles',
       'icon' => 'fas fa-users',
       'classes' => 'bg-purple text-light',
       'submenu' => [
@@ -361,6 +348,12 @@ return [
         [
           'text' => 'Lista de Cargos',
           'url' => 'admin/cargos',
+          'icon' => 'fas fa-list',
+          'classes' => 'bg-transparent text-light',
+        ],
+        [
+          'text' => 'Lista de Roles',
+          'url' => 'admin/roles',
           'icon' => 'fas fa-list',
           'classes' => 'bg-transparent text-light',
         ],

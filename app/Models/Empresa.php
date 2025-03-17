@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Currencies;
+use App\Models\Countries;
 
 class Empresa extends Model
 {
     use HasFactory;
 
-    public function users(){
+    public function users()
+    {
         return $this->hasMany(user::class);
     }
 }

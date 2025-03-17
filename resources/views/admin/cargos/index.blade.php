@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card card-outline card-purple shadow p-3 mb-5 bg-body rounded">
             <div class="card-header">
                 <h3 class="card-title">Cargos existentes</h3>
@@ -35,7 +35,7 @@
                         <tr>
                             <td style="text-align: center">{{ $contadorCargo++ }}</td>
                             <td>{{ $cargo->name }}</td>
-                            {{-- <td>{{ $cargo->description }}</td> --}}
+                            <td>{{ $cargo->description }}</td>
                             <td style="text-align: center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                     <a href="{{ url('/admin/cargos', $cargo->id) }}"

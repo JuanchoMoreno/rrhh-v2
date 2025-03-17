@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('horas_extras_detalles', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha_reporte');
             $table->float('permisos');
             //Campos de horas extras
             $table->float('ex_diur_ord');

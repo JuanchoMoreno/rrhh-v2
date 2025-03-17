@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HoraExtraGeneral;
 use App\Models\HoraExtraDetalle;
 use Illuminate\Http\Request;
 
@@ -12,15 +13,13 @@ class HoraExtraDetalleController extends Controller
      */
     public function index()
     {
-        //
+        $horasExtrasConDetalles = HoraExtraDetalle::obtenerHorasExtrasConDetalles();
+        return view('admin.horas_extras.index', compact('horasExtrasConDetalles', ''));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.horas_extras.create');
     }
 
     /**
@@ -28,38 +27,41 @@ class HoraExtraDetalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar y almacenar la nueva hora extra general
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(HoraExtraDetalle $horaExtraDetalle)
+    public function show(HoraExtraGeneral $horaExtraGeneral)
     {
-        //
+        $horasExtrasConDetalles = HoraExtraGeneral::obtenerHorasExtrasConDetalles();
+        $horaExtraGeneral->load('detalles');
+        return view('admin.horas_extras.show', compact('horaExtraGeneral'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HoraExtraDetalle $horaExtraDetalle)
+    public function edit(HoraExtraGeneral $horaExtraGeneral)
     {
-        //
+        return view('admin.horas_extras.edit', compact('horaExtraGeneral'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HoraExtraDetalle $horaExtraDetalle)
+    public function update(Request $request, HoraExtraGeneral $horaExtraGeneral)
     {
-        //
+        // Validar y actualizar la hora extra general
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HoraExtraDetalle $horaExtraDetalle)
+    public function destroy(HoraExtraGeneral $horaExtraGeneral)
     {
-        //
+        $horaExtraGeneral->delete();
+        return redirect()->route('admin.horas_extras_gen.index');
     }
 }

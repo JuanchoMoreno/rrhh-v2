@@ -1,48 +1,61 @@
 $(document).ready(function () {
-    const ruta = "sistemas_sm/public/admin/";
+    const ruta = "/admin/horas_extras/";
 
     ///////////////////////////////////////// Función para agregar y eliminar secciones
     $("#section_hrp").append($("#section_hrp1").html());
-    $('#addsection').click( function () {
-        $('.numerador').each(function(index, element) {
+    $('#addsection').click(function () {
+        $('.numerador').each(function (index, element) {
             $(element).html(index + 1);
         });
         $("#section_hrp").append($("#section_hrp1").html());
     });
 
-    
     ///////////////////////////////////////// Función para cargar las clases y centros de costo
     calcularSumaHorasExtras();
     calcularSumaRecargos();
     calcularSumaPermisos();
     calcularSumaTotal();
+
     // Cargar clases
     $("#select_depart").on("change", function () {
         var id_depart = $("#select_depart").val();
         if (id_depart) {
-            console.log(ruta + "horas_extras/clase/" + id_depart);
             $.ajax({
-                url: "clase/" + id_depart,
+                url: ruta + "clase/" + id_depart,
                 type: "GET",
                 success: function (data) {
-                    $("#select_clase").html(data);
+                    var options = '<option value="">Seleccione una clase</option>';
+                    $.each(data, function (key, value) {
+                        options += '<option value="' + value.id + '">' + value.name + '</option>';
+                    });
+                    $("#select_clase").html(options);
                 },
+                error: function (xhr, status, error) {
+                    console.error("Error al cargar las clases:", error);
+                }
             });
         } else {
             alert("Debe seleccionar un departamento");
         }
     });
+
     // Cargar centros de costo
     $(document).on("change", "#select_clase", function () {
         var id_clase = $(this).val();
         if (id_clase) {
             $.ajax({
-                url: "ccosto/" + id_clase,
+                url: ruta + "ccosto/" + id_clase,
                 type: "GET",
                 success: function (data) {
-                    console.log(data);
-                    $("#select_ccosto").html(data);
+                    var options = '<option value="">Seleccione un centro de costo</option>';
+                    $.each(data, function (key, value) {
+                        options += '<option value="' + value.id + '">' + value.name + '</option>';
+                    });
+                    $("#select_ccosto").html(options);
                 },
+                error: function (xhr, status, error) {
+                    console.error("Error al cargar los centros de costo:", error);
+                }
             });
         } else {
             alert("Debe seleccionar una clase");
@@ -56,11 +69,11 @@ $(document).ready(function () {
         var ex_diur_festdomin = parseFloat($("#ex_diur_festdomin").val()) || 0;
         var ex_noct_festdomin = parseFloat($("#ex_noct_festdomin").val()) || 0;
 
-        var suma =
-            ex_diur_ord + ex_noct_ord + ex_diur_festdomin + ex_noct_festdomin;
+        var suma = ex_diur_ord + ex_noct_ord + ex_diur_festdomin + ex_noct_festdomin;
         $("#suma_horasextras").val(suma);
         calcularSumaTotal();
     }
+
     // Ver cambios en los inputs de horas extras
     $(".suma_horasExtras").on("input", function () {
         calcularSumaHorasExtras();
@@ -71,17 +84,13 @@ $(document).ready(function () {
         var recargo_noct = parseFloat($("#recargo_noct").val()) || 0;
         var recargo_diur_fest = parseFloat($("#recargo_diur_fest").val()) || 0;
         var recargo_noct_fest = parseFloat($("#recargo_noct_fest").val()) || 0;
-        var recargo_ord_fest_noct =
-            parseFloat($("#recargo_ord_fest_noct").val()) || 0;
+        var recargo_ord_fest_noct = parseFloat($("#recargo_ord_fest_noct").val()) || 0;
 
-        var suma =
-            recargo_noct +
-            recargo_diur_fest +
-            recargo_noct_fest +
-            recargo_ord_fest_noct;
+        var suma = recargo_noct + recargo_diur_fest + recargo_noct_fest + recargo_ord_fest_noct;
         $("#suma_recargos").val(suma);
         calcularSumaTotal();
     }
+
     // Ver cambios en los inputs de recargos
     $(".suma_recargos").on("input", function () {
         calcularSumaRecargos();
@@ -93,6 +102,7 @@ $(document).ready(function () {
         $("#suma_permisos").val(suma_permisos);
         calcularSumaTotal();
     }
+
     // Ver cambios en los inputs de permisos
     $(".suma_permisos").on("input", function () {
         calcularSumaPermisos();
@@ -108,5 +118,6 @@ $(document).ready(function () {
         console.log(suma);
         $("#suma_total").val(suma);
     }
+
     // Escuchar cambios en los inputs de sumas
 });
